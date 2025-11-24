@@ -1,11 +1,18 @@
 [project]
 name = "employeeleavemanagement"
-version = "0.1.0"
-description = "Add your description here"
+version = "1.0.0"
+description = "Employee Leave Management System with FastAPI and PostgreSQL"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.121.3",
     "pydantic>=2.12.4",
+    "pydantic[email]>=2.12.4",
     "uvicorn[standard]>=0.38.0",
+    "sqlalchemy>=2.0.36",
+    "psycopg2-binary>=2.9.10",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "python-multipart>=0.0.20",
+    "python-dotenv>=1.0.0",
 ]
