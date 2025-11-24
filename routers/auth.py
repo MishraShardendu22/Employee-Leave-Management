@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
+import os
 
 from database import get_db
 from schemas import LoginRequest, Token, AdminCreate, AdminResponse
@@ -9,20 +10,23 @@ import crud
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
+# Admin credentials from environment variables
+ADMIN_EMAIL = os.getenv("EMAIL", "").strip('"')
+ADMIN_PASSWORD = os.getenv("PASS", "").strip('"')
+
 
 @router.post("/login/admin", response_model=Token)
 def login_admin(login_data: LoginRequest, db: Session = Depends(get_db)):
-    """Admin login endpoint"""
-    admin = crud.get_admin_by_email(db, login_data.email)
-    
-    if not admin or not verify_password(login_data.password, admin.password_hash):
+    """Admin login endpoint - uses credentials from environment variables"""
+    # Check against environment variables
+    if login_data.email != ADMIN_EMAIL or login_data.password != ADMIN_PASSWORD:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password"
         )
     
     access_token = create_access_token(
-        data={"sub": admin.email, "user_type": "admin", "user_id": admin.id}
+        data={"sub": ADMIN_EMAIL, "user_type": "admin", "user_id": 1}
     )
     
     return {"access_token": access_token, "token_type": "bearer"}
