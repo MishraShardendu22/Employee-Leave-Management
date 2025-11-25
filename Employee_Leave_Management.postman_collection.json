@@ -1,0 +1,999 @@
+{
+	"info": {
+		"_postman_id": "employee-leave-mgmt-001",
+		"name": "Employee Leave Management API",
+		"description": "Complete API collection for Employee Leave Management System with authentication, leave requests, approvals, and admin features",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "employeeToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "employeeId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "managerId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "leaveId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "leaveTypeId",
+			"value": "1",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Admin Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set('adminToken', jsonData.access_token);",
+									"    pm.environment.set('adminToken', jsonData.access_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login/admin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"admin"
+							]
+						},
+						"description": "Login as admin using credentials from environment variables (EMAIL and PASS)"
+					},
+					"response": []
+				},
+				{
+					"name": "Employee Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set('employeeToken', jsonData.access_token);",
+									"    pm.environment.set('employeeToken', jsonData.access_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"employee@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login/employee",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"employee"
+							]
+						},
+						"description": "Login as employee with registered credentials"
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication endpoints for admin and employee login"
+		},
+		{
+			"name": "Admins",
+			"item": [
+				{
+					"name": "Get Admin Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admins/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admins",
+								"me"
+							]
+						},
+						"description": "Get current admin info from environment variables"
+					},
+					"response": []
+				}
+			],
+			"description": "Admin management endpoints"
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Create Employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set('employeeId', jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/employees/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								""
+							]
+						},
+						"description": "Create a new employee account"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/employees/?skip=0&limit=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Get list of all employees with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/employees/{{employeeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								"{{employeeId}}"
+							]
+						},
+						"description": "Get specific employee details by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Employee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Updated\",\n    \"email\": \"john.updated@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/employees/{{employeeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								"{{employeeId}}"
+							]
+						},
+						"description": "Update employee information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Employee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/employees/{{employeeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								"{{employeeId}}"
+							]
+						},
+						"description": "Delete an employee account"
+					},
+					"response": []
+				}
+			],
+			"description": "Employee management endpoints"
+		},
+		{
+			"name": "Managers",
+			"item": [
+				{
+					"name": "Create Manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set('managerId', jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Manager Smith\",\n    \"email\": \"manager@example.com\",\n    \"password\": \"manager123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/managers/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"managers",
+								""
+							]
+						},
+						"description": "Create a new manager account"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Managers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/managers/?skip=0&limit=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"managers",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Get list of all managers with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Manager by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/managers/{{managerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"managers",
+								"{{managerId}}"
+							]
+						},
+						"description": "Get specific manager details by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Manager management endpoints"
+		},
+		{
+			"name": "Leave Types",
+			"item": [
+				{
+					"name": "Create Leave Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set('leaveTypeId', jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sick Leave\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/leave-types/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leave-types",
+								""
+							]
+						},
+						"description": "Create a new leave type (e.g., Sick Leave, Casual Leave, Annual Leave)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Leave Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/leave-types/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leave-types",
+								""
+							]
+						},
+						"description": "Get all available leave types"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Leave Type by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/leave-types/{{leaveTypeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leave-types",
+								"{{leaveTypeId}}"
+							]
+						},
+						"description": "Get specific leave type by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Leave type management endpoints"
+		},
+		{
+			"name": "Leaves",
+			"item": [
+				{
+					"name": "Create Leave Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set('leaveId', jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type_id\": 1,\n    \"start_time\": \"2025-12-01T00:00:00\",\n    \"end_time\": \"2025-12-03T23:59:59\",\n    \"reason\": \"Medical appointment\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/leaves/?employee_id={{employeeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leaves",
+								""
+							],
+							"query": [
+								{
+									"key": "employee_id",
+									"value": "{{employeeId}}"
+								}
+							]
+						},
+						"description": "Create a new leave request for an employee"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Leaves",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/leaves/?skip=0&limit=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leaves",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Get all leave requests with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pending Leaves",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/leaves/pending?skip=0&limit=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leaves",
+								"pending"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Get all pending leave requests awaiting approval"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee Leaves",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/leaves/employee/{{employeeId}}?skip=0&limit=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leaves",
+								"employee",
+								"{{employeeId}}"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Get all leave requests for a specific employee"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Leave by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/leaves/{{leaveId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leaves",
+								"{{leaveId}}"
+							]
+						},
+						"description": "Get specific leave request details by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Leave Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/leaves/{{leaveId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leaves",
+								"{{leaveId}}"
+							]
+						},
+						"description": "Delete a pending leave request (only pending requests can be deleted)"
+					},
+					"response": []
+				}
+			],
+			"description": "Leave request management endpoints"
+		},
+		{
+			"name": "Approvals",
+			"item": [
+				{
+					"name": "Create Approval (Approve Leave)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"leave_id\": 1,\n    \"decision\": \"approved\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/approvals/?manager_id={{managerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"approvals",
+								""
+							],
+							"query": [
+								{
+									"key": "manager_id",
+									"value": "{{managerId}}"
+								}
+							]
+						},
+						"description": "Approve a leave request (decision can be 'approved' or 'rejected')"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Approval (Reject Leave)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"leave_id\": 1,\n    \"decision\": \"rejected\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/approvals/?manager_id={{managerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"approvals",
+								""
+							],
+							"query": [
+								{
+									"key": "manager_id",
+									"value": "{{managerId}}"
+								}
+							]
+						},
+						"description": "Reject a leave request"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Manager Approvals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/approvals/manager/{{managerId}}?skip=0&limit=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"approvals",
+								"manager",
+								"{{managerId}}"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Get all approvals made by a specific manager"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Leave Approval",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/approvals/leave/{{leaveId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"approvals",
+								"leave",
+								"{{leaveId}}"
+							]
+						},
+						"description": "Get approval details for a specific leave request"
+					},
+					"response": []
+				}
+			],
+			"description": "Leave approval management endpoints"
+		},
+		{
+			"name": "Leave Balances",
+			"item": [
+				{
+					"name": "Create Leave Balance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"employee_id\": 1,\n    \"type_id\": 1,\n    \"total_allocated\": 20,\n    \"total_used\": 0,\n    \"remaining\": 20\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/leave-balances/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leave-balances",
+								""
+							]
+						},
+						"description": "Create a leave balance allocation for an employee"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee Leave Balances",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/leave-balances/employee/{{employeeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leave-balances",
+								"employee",
+								"{{employeeId}}"
+							]
+						},
+						"description": "Get all leave balances for a specific employee"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Leave Balance by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/leave-balances/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"leave-balances",
+								"1"
+							]
+						},
+						"description": "Get specific leave balance details by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Leave balance management endpoints"
+		},
+		{
+			"name": "Audit Logs",
+			"item": [
+				{
+					"name": "Get All Audit Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/audit-logs/?skip=0&limit=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"audit-logs",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Get all audit logs with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Audit Logs by Actor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/audit-logs/actor/employee/{{employeeId}}?skip=0&limit=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"audit-logs",
+								"actor",
+								"employee",
+								"{{employeeId}}"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Get audit logs for a specific actor (admin/manager/employee)"
+					},
+					"response": []
+				}
+			],
+			"description": "Audit log viewing endpoints for tracking system activities"
+		},
+		{
+			"name": "Health & Info",
+			"item": [
+				{
+					"name": "Root / API Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Get API information and documentation links"
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Check if the API is running and healthy"
+					},
+					"response": []
+				}
+			],
+			"description": "Basic health check and API information endpoints"
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

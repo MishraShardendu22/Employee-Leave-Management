@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 from database import init_db
 from routers import (
@@ -15,13 +20,30 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS middleware
+# CORS configuration
+origins = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",
+]
+
+# Add environment variable for additional origins
+env_origins = os.getenv("CORS_ORIGINS", "")
+if env_origins and env_origins != "*":
+    origins.extend([origin.strip() for origin in env_origins.split(",")])
+
+print(f"Allowed CORS origins: {origins}")
+
+# CORS middleware - must be added before routes
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
 )
 
 # Include routers
