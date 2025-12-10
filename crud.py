@@ -99,6 +99,16 @@ def get_all_managers(db: Session, skip: int = 0, limit: int = 100) -> List[Manag
     return db.query(Manager).offset(skip).limit(limit).all()
 
 
+def delete_manager(db: Session, manager_id: int) -> bool:
+    manager = get_manager_by_id(db, manager_id)
+    if not manager:
+        return False
+    
+    db.delete(manager)
+    db.commit()
+    return True
+
+
 # ============== Leave Type CRUD ==============
 def create_leave_type(db: Session, name: str) -> LeaveType:
     leave_type = LeaveType(name=name)
@@ -114,6 +124,16 @@ def get_leave_type_by_id(db: Session, type_id: int) -> Optional[LeaveType]:
 
 def get_all_leave_types(db: Session) -> List[LeaveType]:
     return db.query(LeaveType).all()
+
+
+def delete_leave_type(db: Session, type_id: int) -> bool:
+    leave_type = get_leave_type_by_id(db, type_id)
+    if not leave_type:
+        return False
+    
+    db.delete(leave_type)
+    db.commit()
+    return True
 
 
 # ============== Leave CRUD ==============

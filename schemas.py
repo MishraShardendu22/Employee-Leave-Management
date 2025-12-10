@@ -85,7 +85,17 @@ class LeaveTypeBase(BaseModel):
 
 
 class LeaveTypeCreate(LeaveTypeBase):
-    pass
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate_name
+    
+    @classmethod
+    def validate_name(cls, v):
+        if isinstance(v, dict) and 'name' in v:
+            name = v['name']
+            if name.isdigit():
+                raise ValueError('Leave type name cannot be only numbers')
+        return v
 
 
 class LeaveTypeResponse(LeaveTypeBase):

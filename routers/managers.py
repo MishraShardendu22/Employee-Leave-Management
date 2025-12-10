@@ -52,3 +52,33 @@ def get_manager(manager_id: int, db: Session = Depends(get_db)):
             detail="Manager not found"
         )
     return manager
+
+
+@router.delete("/{manager_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_manager(manager_id: int, db: Session = Depends(get_db)):
+    """Delete a manager"""
+    manager = crud.get_manager_by_id(db, manager_id)
+    if not manager:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Manager not found"
+        )
+    
+    success = crud.delete_manager(db, manager_id)
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Failed to delete manager"
+        )
+    
+    # Create audit log
+    crud.create_audit_log(
+        db,
+        actor_type="admin",
+        actor_id=1,  # This should come from authenticated admin
+        action="Deleted manager",
+        target_table="managers",
+        target_id=manager_id
+    )
+    
+    return None

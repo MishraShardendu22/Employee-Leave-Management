@@ -12,6 +12,8 @@ router = APIRouter(prefix="/leaves", tags=["Leaves"])
 @router.post("/", response_model=LeaveResponse, status_code=status.HTTP_201_CREATED)
 def create_leave(leave: LeaveCreate, employee_id: int, db: Session = Depends(get_db)):
     """Create a new leave request"""
+    from models import LeaveBalance
+    
     # Verify employee exists
     employee = crud.get_employee_by_id(db, employee_id)
     if not employee:
@@ -26,6 +28,27 @@ def create_leave(leave: LeaveCreate, employee_id: int, db: Session = Depends(get
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Leave type not found"
+        )
+    
+    # Check leave balance
+    leave_balance = db.query(LeaveBalance).filter(
+        LeaveBalance.employee_id == employee_id,
+        LeaveBalance.type_id == leave.type_id
+    ).first()
+    
+    if not leave_balance:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"No leave balance found for {leave_type.name}. Please contact HR."
+        )
+    
+    # Calculate requested days
+    requested_days = (leave.end_time - leave.start_time).days + 1
+    
+    if leave_balance.remaining < requested_days:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Insufficient leave balance. You have {leave_balance.remaining} days remaining for {leave_type.name}, but requested {requested_days} days."
         )
     
     # Validate dates
