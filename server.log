@@ -1,109 +1,86 @@
 nohup: ignoring input
-/home/mishrashardendu22/Coding_Stuff_Fedora/Dev/ELM_Project/EmployeeLeaveManagement/main.py:76: DeprecationWarning: 
-        on_event is deprecated, use lifespan event handlers instead.
-
-        Read more about it in the
-        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
-        
-  @app.on_event("startup")
-Allowed CORS origins: ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://localhost:3000', 'http://localhost:3001']
-INFO:     Will watch for changes in these directories: ['/home/mishrashardendu22/Coding_Stuff_Fedora/Dev/ELM_Project/EmployeeLeaveManagement']
+INFO:     Will watch for changes in these directories: ['/home/mishrashardendu22/Coding_Stuff_Fedora/Dev/Employee/Employee-Leave-Management']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [37073] using WatchFiles
-Allowed CORS origins: ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://localhost:3000', 'http://localhost:3001']
-INFO:     Started server process [37083]
+INFO:     Started reloader process [91507] using WatchFiles
+INFO:     Started server process [91511]
 INFO:     Waiting for application startup.
-Allowed CORS origins: ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://localhost:3000', 'http://localhost:3001']
+Allowed CORS origins: ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://localhost:3000', 'http://localhost:3001', 'https://leave-management-vanshiki.vercel.app']
 Initializing database...
-2025-11-26 00:30:50,648 INFO sqlalchemy.engine.Engine select pg_catalog.version()
-2025-11-26 00:30:50,648 INFO sqlalchemy.engine.Engine [raw sql] {}
-2025-11-26 00:30:51,174 INFO sqlalchemy.engine.Engine select current_schema()
-2025-11-26 00:30:51,175 INFO sqlalchemy.engine.Engine [raw sql] {}
-2025-11-26 00:30:51,702 INFO sqlalchemy.engine.Engine show standard_conforming_strings
-2025-11-26 00:30:51,702 INFO sqlalchemy.engine.Engine [raw sql] {}
-2025-11-26 00:30:52,222 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2025-11-26 00:30:52,230 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
+2025-12-13 01:28:48,341 INFO sqlalchemy.engine.Engine select pg_catalog.version()
+2025-12-13 01:28:48,341 INFO sqlalchemy.engine.Engine [raw sql] {}
+2025-12-13 01:28:48,853 INFO sqlalchemy.engine.Engine select current_schema()
+2025-12-13 01:28:48,853 INFO sqlalchemy.engine.Engine [raw sql] {}
+2025-12-13 01:28:49,466 INFO sqlalchemy.engine.Engine show standard_conforming_strings
+2025-12-13 01:28:49,466 INFO sqlalchemy.engine.Engine [raw sql] {}
+2025-12-13 01:28:49,935 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-13 01:28:49,949 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
 FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:30:52,231 INFO sqlalchemy.engine.Engine [generated in 0.00074s] {'table_name': 'admins', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:30:52,749 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
+2025-12-13 01:28:49,949 INFO sqlalchemy.engine.Engine [generated in 0.00087s] {'table_name': 'admins', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-12-13 01:28:50,404 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
 FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:30:52,749 INFO sqlalchemy.engine.Engine [cached since 0.5189s ago] {'table_name': 'employees', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:30:53,138 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
+2025-12-13 01:28:50,404 INFO sqlalchemy.engine.Engine [cached since 0.456s ago] {'table_name': 'employees', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-12-13 01:28:50,632 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
 FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:30:53,138 INFO sqlalchemy.engine.Engine [cached since 0.908s ago] {'table_name': 'managers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:30:53,407 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
+2025-12-13 01:28:50,632 INFO sqlalchemy.engine.Engine [cached since 0.6839s ago] {'table_name': 'managers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-12-13 01:28:50,869 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
 FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:30:53,408 INFO sqlalchemy.engine.Engine [cached since 1.177s ago] {'table_name': 'leave_types', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:30:53,668 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
+2025-12-13 01:28:50,870 INFO sqlalchemy.engine.Engine [cached since 0.9214s ago] {'table_name': 'leave_types', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-12-13 01:28:51,102 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
 FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:30:53,669 INFO sqlalchemy.engine.Engine [cached since 1.439s ago] {'table_name': 'leaves', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:30:53,935 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
+2025-12-13 01:28:51,102 INFO sqlalchemy.engine.Engine [cached since 1.154s ago] {'table_name': 'leaves', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-12-13 01:28:51,338 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
 FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:30:53,935 INFO sqlalchemy.engine.Engine [cached since 1.705s ago] {'table_name': 'approvals', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:30:54,199 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
+2025-12-13 01:28:51,338 INFO sqlalchemy.engine.Engine [cached since 1.389s ago] {'table_name': 'approvals', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-12-13 01:28:51,613 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
 FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:30:54,199 INFO sqlalchemy.engine.Engine [cached since 1.969s ago] {'table_name': 'leave_balance', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:30:54,461 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
+2025-12-13 01:28:51,613 INFO sqlalchemy.engine.Engine [cached since 1.665s ago] {'table_name': 'leave_balance', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-12-13 01:28:51,841 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
 FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:30:54,461 INFO sqlalchemy.engine.Engine [cached since 2.231s ago] {'table_name': 'audit_logs', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:30:54,723 INFO sqlalchemy.engine.Engine COMMIT
+2025-12-13 01:28:51,841 INFO sqlalchemy.engine.Engine [cached since 1.893s ago] {'table_name': 'audit_logs', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-12-13 01:28:52,068 INFO sqlalchemy.engine.Engine COMMIT
 INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [37083]
-Allowed CORS origins: ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://localhost:3000', 'http://localhost:3001']
-INFO:     Started server process [37145]
-INFO:     Waiting for application startup.
-Allowed CORS origins: ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://localhost:3000', 'http://localhost:3001']
-Initializing database...
-2025-11-26 00:31:15,440 INFO sqlalchemy.engine.Engine select pg_catalog.version()
-2025-11-26 00:31:15,440 INFO sqlalchemy.engine.Engine [raw sql] {}
-2025-11-26 00:31:16,023 INFO sqlalchemy.engine.Engine select current_schema()
-2025-11-26 00:31:16,023 INFO sqlalchemy.engine.Engine [raw sql] {}
-2025-11-26 00:31:16,604 INFO sqlalchemy.engine.Engine show standard_conforming_strings
-2025-11-26 00:31:16,605 INFO sqlalchemy.engine.Engine [raw sql] {}
-2025-11-26 00:31:17,189 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2025-11-26 00:31:17,196 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
-FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
-WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:31:17,196 INFO sqlalchemy.engine.Engine [generated in 0.00039s] {'table_name': 'admins', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:31:17,778 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
-FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
-WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:31:17,778 INFO sqlalchemy.engine.Engine [cached since 0.5825s ago] {'table_name': 'employees', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:31:18,070 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
-FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
-WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:31:18,070 INFO sqlalchemy.engine.Engine [cached since 0.8742s ago] {'table_name': 'managers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:31:18,363 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
-FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
-WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:31:18,363 INFO sqlalchemy.engine.Engine [cached since 1.167s ago] {'table_name': 'leave_types', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:31:18,658 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
-FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
-WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:31:18,658 INFO sqlalchemy.engine.Engine [cached since 1.462s ago] {'table_name': 'leaves', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:31:18,950 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
-FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
-WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:31:18,951 INFO sqlalchemy.engine.Engine [cached since 1.755s ago] {'table_name': 'approvals', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:31:19,249 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
-FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
-WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:31:19,250 INFO sqlalchemy.engine.Engine [cached since 2.054s ago] {'table_name': 'leave_balance', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:31:19,549 INFO sqlalchemy.engine.Engine SELECT pg_catalog.pg_class.relname 
-FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
-WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
-2025-11-26 00:31:19,549 INFO sqlalchemy.engine.Engine [cached since 2.354s ago] {'table_name': 'audit_logs', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
-2025-11-26 00:31:19,841 INFO sqlalchemy.engine.Engine COMMIT
-INFO:     Application startup complete.
+Database tables created successfully!
+Database initialized successfully!
+2025-12-13 01:29:02,947 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-13 01:29:02,949 INFO sqlalchemy.engine.Engine SELECT employees.id AS employees_id, employees.name AS employees_name, employees.email AS employees_email, employees.password_hash AS employees_password_hash, employees.created_at AS employees_created_at, employees.updated_at AS employees_updated_at 
+FROM employees 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2025-12-13 01:29:02,950 INFO sqlalchemy.engine.Engine [generated in 0.00024s] {'param_1': 100, 'param_2': 0}
+INFO:     127.0.0.1:54480 - "GET /employees/ HTTP/1.1" 200 OK
+2025-12-13 01:29:03,793 INFO sqlalchemy.engine.Engine ROLLBACK
+2025-12-13 01:31:24,982 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-13 01:31:24,985 INFO sqlalchemy.engine.Engine SELECT managers.id AS managers_id, managers.name AS managers_name, managers.email AS managers_email, managers.password_hash AS managers_password_hash, managers.created_at AS managers_created_at 
+FROM managers 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2025-12-13 01:31:24,985 INFO sqlalchemy.engine.Engine [generated in 0.00049s] {'param_1': 100, 'param_2': 0}
+INFO:     127.0.0.1:46634 - "GET /managers/ HTTP/1.1" 200 OK
+2025-12-13 01:31:25,949 INFO sqlalchemy.engine.Engine ROLLBACK
+2025-12-13 01:31:57,044 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-13 01:31:57,045 INFO sqlalchemy.engine.Engine SELECT leave_types.id AS leave_types_id, leave_types.name AS leave_types_name 
+FROM leave_types
+2025-12-13 01:31:57,045 INFO sqlalchemy.engine.Engine [generated in 0.00025s] {}
+INFO:     127.0.0.1:35014 - "GET /leave-types/ HTTP/1.1" 200 OK
+2025-12-13 01:31:57,691 INFO sqlalchemy.engine.Engine ROLLBACK
+2025-12-13 01:32:59,952 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-13 01:32:59,954 INFO sqlalchemy.engine.Engine SELECT leave_balance.id AS leave_balance_id, leave_balance.employee_id AS leave_balance_employee_id, leave_balance.type_id AS leave_balance_type_id, leave_balance.total_allocated AS leave_balance_total_allocated, leave_balance.total_used AS leave_balance_total_used, leave_balance.remaining AS leave_balance_remaining 
+FROM leave_balance 
+WHERE leave_balance.employee_id = %(employee_id_1)s
+2025-12-13 01:32:59,954 INFO sqlalchemy.engine.Engine [generated in 0.00027s] {'employee_id_1': 3}
+INFO:     127.0.0.1:55934 - "GET /leave-balances/employee/3 HTTP/1.1" 200 OK
+2025-12-13 01:33:00,566 INFO sqlalchemy.engine.Engine ROLLBACK
+2025-12-13 01:34:03,374 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-12-13 01:34:03,378 INFO sqlalchemy.engine.Engine SELECT leaves.id AS leaves_id, leaves.employee_id AS leaves_employee_id, leaves.type_id AS leaves_type_id, leaves.start_time AS leaves_start_time, leaves.end_time AS leaves_end_time, leaves.reason AS leaves_reason, leaves.status AS leaves_status, leaves.created_at AS leaves_created_at 
+FROM leaves 
+WHERE leaves.status = %(status_1)s 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2025-12-13 01:34:03,379 INFO sqlalchemy.engine.Engine [generated in 0.00048s] {'status_1': 'pending', 'param_1': 100, 'param_2': 0}
+INFO:     127.0.0.1:39784 - "GET /leaves/pending HTTP/1.1" 200 OK
+2025-12-13 01:34:04,378 INFO sqlalchemy.engine.Engine ROLLBACK
